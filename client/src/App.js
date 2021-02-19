@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import Card from 'react-bootstrap/Card'
 
 function App() {
   return (
+      
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <div class = "container"> 
+            <div className="card" >
+                <h5 className="card-header">Create a new group</h5>
+                <div class="card-body">
+                <Form>
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Group name: </Form.Label>
+                        <br/>
+                        <input type="email" placeholder="Enter group name.." />
+                    </Form.Group>
+                    <br/>
+                    <Button variant="primary" type="submit">
+                        Submit
+                    </Button>
+                </Form>
+                </div>
+            </div>
+        </div> 
     </div>
   );
 }
