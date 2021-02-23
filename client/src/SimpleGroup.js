@@ -7,7 +7,7 @@ import EditGroup from './EditGroup';
 import MoveGroup from './MoveGroup';
 import PeopleTable from './PeopleTable';
 
-const Group = () => {
+const SimpleGroup = () => {
 
     const { id } = useParams();
     const [group, setGroup] = useState([]);
@@ -17,7 +17,6 @@ const Group = () => {
     const [job, setJob] = useState("");
     const [personsList, setPersonsList] = useState([]);
     const [numPersons, setNumPersons] = useState(0);
-    //const []
     
 
     useEffect(() => {
@@ -104,4 +103,4 @@ const Group = () => {
     );
 }
 
-export default Group;
+export default SimpleGroup;

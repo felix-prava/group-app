@@ -138,6 +138,20 @@ app.patch('/api/people/edit/:id', (req, res) =>{
     });
 });
 
+//Edit the name of a group
+app.patch('/api/groups/edit/:id', (req, res) =>{
+    const id = req.params.id;
+    const groupName = req.body.groupName;
+    db.query('UPDATE pgroups SET group_name = ?  WHERE id = ?', [groupName, id],
+    (err, result) => {
+        if (err){
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
 //Move a group to another group
 app.patch('/api/groups/:id', (req, res) =>{
     const id = req.params.id;
