@@ -18,7 +18,7 @@ app.listen(3001, () => {
 });
 
 //Adding groups into the DB
-app.post('/api/add-group', (req, res) =>{
+app.post('/api/groups', (req, res) =>{
     const group = req.body.group;
 
     db.query('INSERT INTO pgroups (group_name) VALUES (?)', [group],
@@ -34,6 +34,59 @@ app.post('/api/add-group', (req, res) =>{
 //Getting all the groups
 app.get('/api/groups', (req, res) =>{
     db.query('SELECT * FROM pgroups',
+    (err, result) => {
+        if (err){
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+//Getting a group based on id
+app.get('/api/groups/:id', (req, res) =>{
+    db.query('SELECT * FROM pgroups WHERE id = ' + req.params.id,
+    (err, result) => {
+        if (err){
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+//Adding persons into the a group
+app.post('/api/people', (req, res) =>{
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const job = req.body.job;
+    const groupId = req.body.groupId;
+
+    db.query('INSERT INTO people (first_name, last_name, job, group_id) VALUES (?, ?, ?, ?)', [firstName, lastName, job, groupId],
+    (err, result) => {
+        if (err){
+            console.log(err);
+        } else {
+            res.send("Values inserted!");
+        }
+    });
+});
+
+//Getting all the people
+app.get('/api/people', (req, res) =>{
+    db.query('SELECT * FROM people',
+    (err, result) => {
+        if (err){
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+//Getting all people from a group
+app.get('/api/groups/people/:id', (req, res) =>{
+    db.query('SELECT * FROM people WHERE group_id = ' + req.params.id,
     (err, result) => {
         if (err){
             console.log(err);

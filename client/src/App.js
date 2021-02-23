@@ -2,11 +2,12 @@ import './App.css';
 import Navbar from './Navbar';
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import Card from 'react-bootstrap/Card'
 import { useState } from 'react';
 import Axios from 'axios'; 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AddPerson from './AddPerson';
+import Groups from './Groups';
+import Group from './Group';
  
 
 function App() {
@@ -16,10 +17,14 @@ function App() {
     const [groupsList, setGroupsList] = useState([]);
 
     const addGroup = () => {
-        Axios.post('http://localhost:3001/api/add-group', 
-        {group: group }).then(() => {
-            console.log("Group added");
-        });
+        if (group === "" || group === "Enter group name..")
+            alert("You can not create a group with an empty name!");
+        else{
+            Axios.post('http://localhost:3001/api/groups', 
+            {group: group }).then(() => {
+                console.log("Group added");
+            });
+        }
     };
 
     const getGroups = () => {
@@ -27,6 +32,7 @@ function App() {
             setGroupsList(response.data);
         });
     };
+    getGroups();
 
     return (
         <Router>
@@ -52,15 +58,17 @@ function App() {
                                         Submit
                                     </Button>
                                 </Form>
-                                <br/>
-                                <Button variant="primary" onClick={getGroups}>
-                                    All groups
-                                </Button>
                                 </div>
                             </div>
                         </Route>
-                        <Route exact path = "/test">
-                            <AddPerson />
+                        <Route exact path = "/add-person">
+                            <AddPerson groupsList={groupsList} />
+                        </Route>
+                        <Route exact path = "/groups">
+                            <Groups groupsList={groupsList} />
+                        </Route>
+                        <Route exact path = "/groups/:id">
+                            <Group/>
                         </Route>
                     </Switch>
                 </div> 

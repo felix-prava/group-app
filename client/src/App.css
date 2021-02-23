@@ -1,3 +1,7 @@
 .App {
   text-align: center;
 }
+
+.card-body a{
+  text-decoration: none;
+}
