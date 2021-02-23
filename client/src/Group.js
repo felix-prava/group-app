@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 
 const Group = () => {
 
@@ -35,10 +36,14 @@ const Group = () => {
     }, []);
 
     const addPerson = () => {
-        Axios.post('http://localhost:3001/api/people', 
-        {firstName: firstName, lastName: lastName, job: job, groupId: id }).then(() => {
-            console.log("Person added");
-        });
+        if (firstName === "" || lastName === "" || job === ""){
+            alert("All fields are mandatory!");
+        } else{
+            Axios.post('http://localhost:3001/api/people', 
+            {firstName: firstName, lastName: lastName, job: job, groupId: id }).then(() => {
+                console.log("Person added");
+            });
+        }
     };
     
 
@@ -47,18 +52,14 @@ const Group = () => {
             <div className="card" >
                 {group.map((group) => (
                     <div>
-                        <div class="card-header"><h5>{ group.group_name }</h5></div>
-                        <div class="card-body" key={group.id}>
-                            Contains { numPersons } persons
-                            <br/><br/>
-                        </div>
+                        <div class="card-header"><h5>{ group.group_name }</h5> <strong>Contains { numPersons } persons</strong></div>
+                        <br/>
                     </div>
                 ))}
                 <div className="container">
-                    <table class="table table-success table-striped">
+                    <table class="table table-success table-striped table-hover">
                     <thead>
                         <tr>
-                        <th scope="col">#</th>
                         <th scope="col">First name</th>
                         <th scope="col">Last name</th>
                         <th scope="col">Job</th>
@@ -66,12 +67,18 @@ const Group = () => {
                     </thead>
                         <tbody>
                         {personsList.map((person) => (
-                            <tr>
-                            <th scope="row">1</th>
-                            <td>{ person.first_name }</td>
-                            <td>{ person.last_name }</td>
-                            <td>{ person.job }</td>
-                            </tr>
+                                <tr>
+                                <td>
+                                    <a href={`/persons/${person.id}`}>{ person.first_name }</a>
+                                </td>
+                                <td>
+                                    <a href={`/persons/${person.id}`}>{ person.last_name }</a>
+                                </td>
+                                <td>
+                                    <a href={`/persons/${person.id}`}>{ person.job }</a>
+                                </td>
+
+                                </tr>
                         ))}
                         </tbody>
                     </table>

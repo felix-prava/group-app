@@ -84,9 +84,65 @@ app.get('/api/people', (req, res) =>{
     });
 });
 
+//Getting a specific person
+app.get('/api/people/:id', (req, res) =>{
+    db.query('SELECT * FROM people WHERE id = ' + req.params.id,
+    (err, result) => {
+        if (err){
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
 //Getting all people from a group
 app.get('/api/groups/people/:id', (req, res) =>{
     db.query('SELECT * FROM people WHERE group_id = ' + req.params.id,
+    (err, result) => {
+        if (err){
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+//Move a person to another group
+app.patch('/api/people/:id', (req, res) =>{
+    const id = req.params.id;
+    const groupId = req.body.groupId;
+    db.query('UPDATE people SET group_id = ? WHERE id = ?', [groupId, id],
+    (err, result) => {
+        if (err){
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+//Edit a person
+app.patch('/api/people/edit/:id', (req, res) =>{
+    const id = req.params.id;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const job = req.body.job;
+    db.query('UPDATE people SET first_name = ?, last_name = ?, job = ?  WHERE id = ?', [firstName, lastName, job, id],
+    (err, result) => {
+        if (err){
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+//Move a group to another group
+app.patch('/api/groups/:id', (req, res) =>{
+    const id = req.params.id;
+    const groupId = req.body.groupId;
+    db.query('UPDATE pgroups SET group_id = ? WHERE id = ?', [groupId, id],
     (err, result) => {
         if (err){
             console.log(err);

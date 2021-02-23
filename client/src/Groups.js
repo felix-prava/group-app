@@ -9,14 +9,26 @@ const Groups = (props) => {
             <div class="card-header"><h5>All groups</h5></div>
             
             <div class="card-body">
-                {groupsList.map((group) => (
-                    <div key={group.id}>
-                        <Link to={`/groups/${group.id}`}>
-                            { group.group_name }
-                            <br/><br/>
-                        </Link>
-                    </div>
-                ))}
+            <div className="container">
+                    <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                        <tr>
+                        <th scope="col">Group name</th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                        {groupsList.map((group) => (
+                            <tr>
+                            <td>
+                                <Link to={`/groups/${group.id}`}>
+                                    { group.group_name }
+                                </Link>
+                            </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );
