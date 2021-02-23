@@ -177,3 +177,16 @@ app.patch('/api/groups/:id', (req, res) =>{
         }
     });
 });
+
+
+/* //Getting all the people with their group
+app.get('/api/people-team', (req, res) =>{
+    db.query('SELECT people.first_name, people.last_name, people.job, pgroups.group_name FROM people INNER JOIN pgroups ON people.group_id=pgroups.id',
+    (err, result) => {
+        if (err){
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+}); */
