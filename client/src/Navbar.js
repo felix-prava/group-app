@@ -11,6 +11,9 @@ const Navbar = () => {
                             <Link class="nav-link active" aria-current="page" to="/groups">Groups</Link>
                         </li>
                         <li class="nav-item">
+                            <Link class="nav-link" to="/group/new">New Group</Link>
+                        </li>
+                        <li class="nav-item">
                             <Link class="nav-link" to="/add-person">Add a person</Link>
                         </li>
                     </ul>

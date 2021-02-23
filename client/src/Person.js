@@ -20,11 +20,11 @@ const Person = (props) => {
         })
         .then((data) => {
             setPerson(data);
-            setFirstName(data.first_name);
-            setLastName(data.last_name);
-            setJob(data.job);
+            setFirstName(data[0].first_name);
+            setLastName(data[0].last_name);
+            setJob(data[0].job);
         })
-    }, []);
+    }, [id]);
 
     
 
@@ -32,11 +32,13 @@ const Person = (props) => {
         Axios.patch('http://localhost:3001/api/people/' + id, 
         {groupId: groupId }).then(() => {
             console.log("Person moved");
-        });
+        }).then(() => {
+            alert(firstName + "was moved to another group!")
+        })
     };
 
     const editPerson = () => {
-        if (firstName === null || lastName === "" || job === ""){
+        if (firstName === "" || lastName === "" || job === ""){
             alert("All fields must be completed!");
         } else{
             Axios.patch('http://localhost:3001/api/people/edit/' + id, 
@@ -58,6 +60,7 @@ const Person = (props) => {
                 ))}
                 <div className="container">
                     <h5>Move this person to another group:</h5>
+                    <br/>
                         {groupsList.map((group) => (
                             <div className="container">
                                 <div className="card" >
@@ -68,8 +71,10 @@ const Person = (props) => {
                                         </button>
                                     </div>
                                 </div>
+                                <br/>
                             </div>
                         ))}
+                    <br/>
                 </div>
             </div>
             <br/>
