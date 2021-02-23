@@ -31,7 +31,7 @@ app.post('/api/groups', (req, res) =>{
     });
 });
 
-//Getting all the groups
+//Get all the groups
 app.get('/api/groups', (req, res) =>{
     db.query('SELECT * FROM pgroups',
     (err, result) => {
@@ -43,9 +43,21 @@ app.get('/api/groups', (req, res) =>{
     });
 });
 
-//Getting a group based on id
+//Get a group based on id
 app.get('/api/groups/:id', (req, res) =>{
     db.query('SELECT * FROM pgroups WHERE id = ' + req.params.id,
+    (err, result) => {
+        if (err){
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+//Get the teams for a specific group
+app.get('/api/groups/owned/:id', (req, res) =>{
+    db.query('SELECT * FROM pgroups WHERE group_id = ' + req.params.id,
     (err, result) => {
         if (err){
             console.log(err);

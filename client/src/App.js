@@ -1,11 +1,9 @@
 import './App.css';
 import Navbar from './Navbar';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import Axios from 'axios'; 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import AddPerson from './AddPerson';
+import AllPeople from './AllPeople';
 import Groups from './Groups';
 import Group from './Group';
 import Person from './Person';
@@ -39,7 +37,7 @@ function App() {
                             <AddGroup />
                         </Route>
                         <Route exact path = "/add-person">
-                            <AddPerson groupsList={groupsList} />
+                            <AllPeople />
                         </Route>
                         <Route exact path = "/groups">
                             <Groups groupsList={groupsList} />

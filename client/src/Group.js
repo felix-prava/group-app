@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import EditGroup from './EditGroup';
 import MoveGroup from './MoveGroup';
-import PeopleTable from './PeopleTable';
+import SimpleGroup from './SimpleGroup';
 
 const Group = () => {
 
@@ -17,7 +17,6 @@ const Group = () => {
     const [job, setJob] = useState("");
     const [personsList, setPersonsList] = useState([]);
     const [numPersons, setNumPersons] = useState(0);
-    //const []
     
 
     useEffect(() => {
@@ -54,15 +53,7 @@ const Group = () => {
 
     return (
         <div>
-            <div className="card" >
-                {group.map((group) => (
-                    <div>
-                        <div class="card-header"><h5>{ group.group_name }</h5> <strong>Contains { numPersons } persons</strong></div>
-                        <br/>
-                    </div>
-                ))}
-                <PeopleTable personsList={personsList}/>
-            </div>
+            <SimpleGroup id={id} groupName={groupName} />
             <br/>
             <br/>
             <br/>
