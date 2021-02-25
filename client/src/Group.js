@@ -49,6 +49,17 @@ const Group = () => {
             });
         }
     };
+
+    const moveGroup = () => {
+        if (firstName === "" || lastName === "" || job === ""){
+            alert("All fields are mandatory!");
+        } else{
+            Axios.post('http://localhost:3001/api/people', 
+            {firstName: firstName, lastName: lastName, job: job, groupId: id }).then(() => {
+                console.log("Person added");
+            });
+        }
+    };
     
 
     return (
