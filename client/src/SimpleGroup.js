@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import PeopleTable from './PeopleTable';
 
@@ -28,7 +27,7 @@ const SimpleGroup = (props) => {
             setPersonsList(data);
             setNumPersons(data.length);
         })
-    }, []);
+    });
 
 
     return (

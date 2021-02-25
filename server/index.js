@@ -191,4 +191,25 @@ app.get('/api/people-team', (req, res) =>{
             res.send(result);
         }
     });
+});
+
+//Delete a group and its content
+app.delete('/api/groups/:id', (req, res) =>{
+    const id = req.params.id;
+    db.query('DELETE FROM people WHERE group_id = ' + req.params.id,
+    (err, result) => {
+        if (err){
+            console.log(err);
+        } else{
+            console.log(result);
+        }
+    });
+    db.query('DELETE FROM pgroups WHERE id = ' + req.params.id,
+    (err, result) => {
+        if (err){
+            console.log(err);
+        } else{
+            console.log(result);
+        }
+    });
 }); 

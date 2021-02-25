@@ -1,6 +1,5 @@
 import { useState ,useEffect} from 'react';
 import Axios from 'axios';
-import { Alert } from 'react-alert';
 
 const MoveGroup = (props) => {
     
@@ -24,7 +23,7 @@ const MoveGroup = (props) => {
         } else {
             Axios.patch('http://localhost:3001/api/groups/' + id, 
             {groupId: groupId }).then(() => {
-                console.log("Person moved");
+                console.log("Group moved");
             }).then(() => {
                 alert(groupName + " was moved to another group!")
             })

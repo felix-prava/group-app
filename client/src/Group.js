@@ -4,19 +4,16 @@ import Axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import EditGroup from './EditGroup';
-import MoveGroup from './MoveGroup';
 import SimpleGroup from './SimpleGroup';
+import { Link } from 'react-router-dom';
 
 const Group = () => {
 
     const { id } = useParams();
-    const [group, setGroup] = useState([]);
     const [groupName, setGroupName] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [job, setJob] = useState("");
-    const [personsList, setPersonsList] = useState([]);
-    const [numPersons, setNumPersons] = useState(0);
     
 
     useEffect(() => {
@@ -25,7 +22,6 @@ const Group = () => {
             return res.json()
         })
         .then((data) => {
-            setGroup(data);
             setGroupName(data[0].group_name);
         })
 
@@ -33,11 +29,7 @@ const Group = () => {
         .then(res => {
             return res.json()
         })
-        .then((data) => {
-            setPersonsList(data);
-            setNumPersons(data.length);
-        })
-    }, []);
+    });
 
     const addPerson = () => {
         if (firstName === "" || lastName === "" || job === ""){
@@ -50,17 +42,10 @@ const Group = () => {
         }
     };
 
-    const moveGroup = () => {
-        if (firstName === "" || lastName === "" || job === ""){
-            alert("All fields are mandatory!");
-        } else{
-            Axios.post('http://localhost:3001/api/people', 
-            {firstName: firstName, lastName: lastName, job: job, groupId: id }).then(() => {
-                console.log("Person added");
-            });
-        }
+    const deleteGroup = (id) => {
+        Axios.delete(`http://localhost:3001/api/groups/${id}`);
+        //than redirect to groups page
     };
-    
 
     return (
         <div>
@@ -101,7 +86,12 @@ const Group = () => {
             <br/>
             <EditGroup id={id} />
             <br/>
-            <MoveGroup id={id} groupName={groupName}/>
+            <Link class="nav-link" to={`/groups/move/${id}`} >Move this group</Link>
+            <br/>
+            <Button variant="danger" onClick={() => deleteGroup(id)}>
+                Delete group
+            </Button>
+            <br/>
         </div>
     );
 }

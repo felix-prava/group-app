@@ -8,6 +8,7 @@ import Groups from './Groups';
 import Group from './Group';
 import Person from './Person';
 import AddGroup from './AddGroup';
+import TeamMoving from './TeamMoving';
  
 
 function App() {
@@ -47,6 +48,9 @@ function App() {
                         </Route>
                         <Route exact path = "/persons/:id">
                             <Person groupsList={groupsList} />
+                        </Route>
+                        <Route exact path = "/groups/move/:id">
+                            <TeamMoving />
                         </Route>
                     </Switch>
                 </div> 
